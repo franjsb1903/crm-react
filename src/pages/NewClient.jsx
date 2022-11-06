@@ -1,0 +1,46 @@
+import { useNavigate, Form as FormRouter } from 'react-router-dom'
+import Form from '../components/Form'
+
+export const action = async ({ request }) => {
+  const formData = await request.formData()
+
+  const data = Object.fromEntries(formData)
+
+  console.log(data)
+}
+
+const NewClient = () => {
+  const navigate = useNavigate()
+
+  return (
+    <>
+      <h1 className="font-black text-4xl text-blue-900">Nuevo Cliente</h1>
+      <p className="mt-3">
+        Completa todos los campos para registrar un nuevo cliente
+      </p>
+
+      <div className="flex justify-end">
+        <button
+          className="bg-blue-800 text-white px-3 py-1 font-bold uppercase"
+          onClick={() => navigate(-1)}
+        >
+          Volver
+        </button>
+      </div>
+
+      <div className="bg-white shadow rounded-md md:w-3/4 mt-10 mx-auto px-5 py-10">
+        <FormRouter method="post">
+          <Form />
+
+          <input
+            type="submit"
+            className="mt-5 w-full bg-blue-800 p-3 uppercase font-bold text-white text-lg"
+            value={'Registrar cliente'}
+          />
+        </FormRouter>
+      </div>
+    </>
+  )
+}
+
+export default NewClient
