@@ -1,6 +1,6 @@
-# Cotizador Criptomonedas
+# CRM
 
-Aplicación para cotizar criptomonedas, conociendo su precio actual, su precio durante el día y su porcentage de variación.
+CRM para el control de clientes realizado en ReactJS.
 
 ## Tecnologías
 
