@@ -1,37 +1,63 @@
-export const clients = [
-  {
-    id: 1,
-    nombre: 'Juan',
-    telefono: 102013313,
-    email: 'juan@juan.com',
-    empresa: 'Codigo Con Juan',
-  },
-  {
-    id: 2,
-    nombre: 'Karen',
-    telefono: 138198313,
-    email: 'karen@juan.com',
-    empresa: 'Codigo Con Juan',
-  },
-  {
-    id: 3,
-    nombre: 'Josue',
-    telefono: 31983913,
-    email: 'josue@juan.com',
-    empresa: 'Codigo Con Juan',
-  },
-  {
-    id: 4,
-    nombre: 'Miguel',
-    telefono: 319381983,
-    email: 'miguel@juan.com',
-    empresa: 'Codigo Con Juan',
-  },
-  {
-    id: 5,
-    nombre: 'Pedro',
-    telefono: 1398198938,
-    email: 'pedro@juan.com',
-    empresa: 'Codigo Con Juan',
-  },
-]
+import { API_URL } from '../config/constants'
+
+export const getClients = async () => {
+  const url = API_URL
+
+  const response = await fetch(url)
+  const json = await response.json()
+
+  return json
+}
+
+export const getClient = async id => {
+  const url = `${API_URL}/${id}`
+
+  const response = await fetch(url)
+  const json = await response.json()
+
+  return json
+}
+
+export const newClient = async data => {
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    await response.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const editClient = async (id, data) => {
+  try {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    await response.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const deleteClient = async id => {
+  try {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'DELETE',
+    })
+
+    await response.json()
+  } catch (error) {
+    console.error(error)
+  }
+}

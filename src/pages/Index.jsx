@@ -1,9 +1,10 @@
 import { useLoaderData } from 'react-router-dom'
-import Client from '../components/Client'
-import { clients } from '../data/clients'
+import TableClients from '../components/table/TableClients'
+import TitlePage from '../components/TitlePage'
+import { getClients } from '../data/clients'
 
 export const loader = () => {
-  return clients
+  return getClients()
 }
 
 const Index = () => {
@@ -11,26 +12,15 @@ const Index = () => {
 
   return (
     <>
-      <h1 className="font-black text-4xl text-blue-900">Clientes</h1>
-      <p className="mt-3">Administra tus clientes</p>
+      <TitlePage title={'Clientes'} subtitle={'Administra tus clientes'} />
       {clients.length ? (
-        <table className="w-full bg-white shadow mt-5 table-auto">
-          <thead className="bg-blue-800 text-white">
-            <tr>
-              <th className="p-2">Cliente</th>
-              <th className="p-2">Contacto</th>
-              <th className="p-2">Acciones</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {clients.map(client => (
-              <Client client={client} key={client.id} />
-            ))}
-          </tbody>
-        </table>
+        <TableClients clients={clients} />
       ) : (
-        <p className="text-center mt-10">No hay clientes aún</p>
+        <div className="bg-gray-200 mt-10 rounded-md flex flex-row justify-center items-center h-56">
+          <h2 className="text-center font-bold text-2xl">
+            No hay clientes aún
+          </h2>
+        </div>
       )}
     </>
   )
